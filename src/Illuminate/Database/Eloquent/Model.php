@@ -1626,7 +1626,10 @@ abstract class Model implements Arrayable, ArrayAccess, CanBeEscapedWhenCastToSt
      */
     public function getConnectionName()
     {
-        return $this->connection ?? config('database.default');
+        if ($this->connection === null) {
+            return config('database.default');
+        }
+        return $this->connection;
     }
 
     /**
